@@ -4,18 +4,18 @@
                      oor:name="Factories" oor:package="org.openoffice.Office.UI">
  <node oor:name="Registered">
   <node oor:name="UIElementFactories">
-   <node oor:name="org.skorpionos.sk_libre.writer.PanelFactory" oor:op="replace">
+   <node oor:name="org.skorpionos.sk_office.writer.PanelFactory" oor:op="replace">
     <prop oor:name="Type">
      <value>toolpanel</value>
     </prop>
     <prop oor:name="Name">
-     <value>org.skorpionos.sk_libre.writer.PanelFactory</value>
+     <value>org.skorpionos.sk_office.writer.PanelFactory</value>
     </prop>
     <prop oor:name="Module">
      <value/>
     </prop>
     <prop oor:name="FactoryImplementation">
-     <value>org.skorpionos.sk_libre.writer.PanelFactory</value>
+     <value>org.skorpionos.sk_office.writer.PanelFactory</value>
     </prop>
    </node>
   </node>

@@ -54,7 +54,7 @@
      <value>1000</value>
     </prop>
     <prop oor:name="ImplementationURL" oor:type="xs:string">
-     <value>private:resource/toolpanel/org.skorpionos.sk_libre.math.PanelFactory/SkLibreMathAiPanel</value>
+     <value>private:resource/toolpanel/org.skorpionos.sk_office.math.PanelFactory/SkLibreMathAiPanel</value>
     </prop>
     <prop oor:name="ContextList">
      <value oor:separator=";">Math, any, visible;</value>

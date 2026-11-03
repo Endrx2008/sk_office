@@ -54,7 +54,7 @@
      <value>1000</value>
     </prop>
     <prop oor:name="ImplementationURL" oor:type="xs:string">
-     <value>private:resource/toolpanel/org.skorpionos.sk_libre.calc.PanelFactory/SkLibreCalcAiPanel</value>
+     <value>private:resource/toolpanel/org.skorpionos.sk_office.calc.PanelFactory/SkLibreCalcAiPanel</value>
     </prop>
     <prop oor:name="ContextList">
      <value oor:separator=";">Calc, any, visible;</value>
@@ -81,7 +81,7 @@
      <value>2000</value>
     </prop>
     <prop oor:name="ImplementationURL" oor:type="xs:string">
-     <value>private:resource/toolpanel/org.skorpionos.sk_libre.calc.PanelFactory/SkLibreCalcFormulaPanel</value>
+     <value>private:resource/toolpanel/org.skorpionos.sk_office.calc.PanelFactory/SkLibreCalcFormulaPanel</value>
     </prop>
     <prop oor:name="ContextList">
      <value oor:separator=";">Calc, any, visible;</value>

@@ -54,7 +54,7 @@
      <value>1000</value>
     </prop>
     <prop oor:name="ImplementationURL" oor:type="xs:string">
-     <value>private:resource/toolpanel/org.skorpionos.sk_libre.writer.PanelFactory/SkLibreAiPanel</value>
+     <value>private:resource/toolpanel/org.skorpionos.sk_office.writer.PanelFactory/SkLibreAiPanel</value>
     </prop>
     <prop oor:name="ContextList">
      <value oor:separator=";">WriterVariants, any, visible;</value>

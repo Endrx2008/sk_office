@@ -45,7 +45,7 @@ def run_in_background(ctx, work, on_done):
             _MainThreadCallback(lambda: on_done(result, error, tb_text)), None
         )
 
-    threading.Thread(target=worker, name="sk_libre-ai", daemon=True).start()
+    threading.Thread(target=worker, name="sk_office-ai", daemon=True).start()
 
 
 def main_thread_poster(ctx):

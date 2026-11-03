@@ -7,7 +7,7 @@ from com.sun.star.ui import XUIElementFactory
 
 sys.path.insert(0, os.path.dirname(__file__))
 
-IMPL_NAME = "org.skorpionos.sk_libre.calc.PanelFactory"
+IMPL_NAME = "org.skorpionos.sk_office.calc.PanelFactory"
 
 
 class PanelFactory(unohelper.Base, XUIElementFactory, XServiceInfo):

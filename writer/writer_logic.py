@@ -39,14 +39,14 @@ import uno
 
 from com.sun.star.text.ControlCharacter import PARAGRAPH_BREAK
 
-from sk_libre_ai.config import Settings
-from sk_libre_ai.json_chat import (
+from sk_office_ai.config import Settings
+from sk_office_ai.json_chat import (
     DEFAULT_TIMEOUT, LANGUAGE_NAMES, MEMORY_NUM_CTX, chat_json, fit_history, has_memory,
 )
-from sk_libre_ai.model_select import best_model, pick_best_model
-from sk_libre_ai.ollama_client import OllamaError, Cancelled, chat, chat_stream
+from sk_office_ai.model_select import best_model, pick_best_model
+from sk_office_ai.ollama_client import OllamaError, Cancelled, chat, chat_stream
 
-APP_NAME = "sk_libre-writer"
+APP_NAME = "sk_office-writer"
 
 DOCUMENT_SNAPSHOT_MAX_CHARS = 4000
 
@@ -1726,5 +1726,5 @@ def summarize(doc):
 
 def ask_turn(request: dict):
     """_ask_turn plus SKAI_ Memory: what other SKAI apps know goes in, the exchange is recorded."""
-    from sk_libre_ai.skai_memory_bridge import around_turn
-    return around_turn("sk_libre_writer", request, _ask_turn)
+    from sk_office_ai.skai_memory_bridge import around_turn
+    return around_turn("sk_office_writer", request, _ask_turn)

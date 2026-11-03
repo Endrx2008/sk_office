@@ -18,13 +18,13 @@ from math_logic import (  # noqa: E402
     APP_NAME,
     apply_turn, ask_explain, ask_turn, forget, prepare_explain, prepare_turn,
 )
-from sk_libre_ai.async_call import main_thread_poster, run_in_background  # noqa: E402
-from sk_libre_ai.ollama_client import CancelToken  # noqa: E402
-from sk_libre_ai.conflict_dialog import ask_confirm, ask_merge  # noqa: E402
-from sk_libre_ai.i18n import Translator, is_no_model  # noqa: E402
-from sk_libre_ai.config import Settings  # noqa: E402
-from sk_libre_ai.json_chat import DEFAULT_TIMEOUT, full_features  # noqa: E402
-from sk_libre_ai.model_select import best_model  # noqa: E402
+from sk_office_ai.async_call import main_thread_poster, run_in_background  # noqa: E402
+from sk_office_ai.ollama_client import CancelToken  # noqa: E402
+from sk_office_ai.conflict_dialog import ask_confirm, ask_merge  # noqa: E402
+from sk_office_ai.i18n import Translator, is_no_model  # noqa: E402
+from sk_office_ai.config import Settings  # noqa: E402
+from sk_office_ai.json_chat import DEFAULT_TIMEOUT, full_features  # noqa: E402
+from sk_office_ai.model_select import best_model  # noqa: E402
 
 
 def _is_no_reply_error(err):

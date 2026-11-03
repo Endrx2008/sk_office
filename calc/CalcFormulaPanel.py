@@ -21,10 +21,10 @@ sys.path.insert(0, os.path.dirname(__file__))
 from calc_formulas import absolute, find_formula, function_formula, load_catalog, syntax  # noqa: E402
 from calc_logic import APP_NAME  # noqa: E402
 import calc_busy  # noqa: E402
-from sk_libre_ai.async_call import main_thread_poster, run_in_background  # noqa: E402
-from sk_libre_ai.config import Settings  # noqa: E402
-from sk_libre_ai.i18n import Translator  # noqa: E402
-from sk_libre_ai.ollama_client import CancelToken  # noqa: E402
+from sk_office_ai.async_call import main_thread_poster, run_in_background  # noqa: E402
+from sk_office_ai.config import Settings  # noqa: E402
+from sk_office_ai.i18n import Translator  # noqa: E402
+from sk_office_ai.ollama_client import CancelToken  # noqa: E402
 
 MAX_OTHERS = 5
 

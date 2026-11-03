@@ -1,4 +1,4 @@
-"""UI strings for the sk_libre panels and conflict dialog, in LibreOffice's
+"""UI strings for the sk_office panels and conflict dialog, in LibreOffice's
 own UI language (Tools > Options > Language Settings > User interface).
 
 English is the base; any key missing from a translation falls back to it,

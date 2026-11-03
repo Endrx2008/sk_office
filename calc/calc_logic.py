@@ -18,15 +18,15 @@ import traceback
 
 import uno
 
-from sk_libre_ai.config import Settings
-from sk_libre_ai.conflict_dialog import KEEP_MINE, MINE_FIRST, USE_AI
-from sk_libre_ai.json_chat import (
+from sk_office_ai.config import Settings
+from sk_office_ai.conflict_dialog import KEEP_MINE, MINE_FIRST, USE_AI
+from sk_office_ai.json_chat import (
     DEFAULT_TIMEOUT, LANGUAGE_NAMES, MEMORY_NUM_CTX, chat_json, fit_history, has_memory,
 )
-from sk_libre_ai.model_select import best_model
-from sk_libre_ai.ollama_client import chat
+from sk_office_ai.model_select import best_model
+from sk_office_ai.ollama_client import chat
 
-APP_NAME = "sk_libre-calc"
+APP_NAME = "sk_office-calc"
 
 # Every chat turn runs the model twice (measured on qwen2.5:0.5b: asked
 # for {"message", "actions"} in ONE reply, it filled "message" and left
@@ -816,5 +816,5 @@ def ask_explain(request: dict):
 
 def ask_turn(request: dict):
     """_ask_turn plus SKAI_ Memory: what other SKAI apps know goes in, the exchange is recorded."""
-    from sk_libre_ai.skai_memory_bridge import around_turn
-    return around_turn("sk_libre_calc", request, _ask_turn)
+    from sk_office_ai.skai_memory_bridge import around_turn
+    return around_turn("sk_office_calc", request, _ask_turn)

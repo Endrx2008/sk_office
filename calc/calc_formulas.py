@@ -28,8 +28,8 @@ from __future__ import annotations
 import re
 import unicodedata
 
-from sk_libre_ai.json_chat import DEFAULT_TIMEOUT, LANGUAGE_NAMES, chat_json
-from sk_libre_ai.model_select import best_model
+from sk_office_ai.json_chat import DEFAULT_TIMEOUT, LANGUAGE_NAMES, chat_json
+from sk_office_ai.model_select import best_model
 
 CATEGORIES = {1: "Database", 2: "Date & Time", 3: "Financial", 4: "Information",
               5: "Logical", 6: "Mathematical", 7: "Array", 8: "Statistical",

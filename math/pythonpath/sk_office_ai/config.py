@@ -1,4 +1,4 @@
-"""XDG-path JSON settings for sk_libre extensions, mirroring the sksuite
+"""XDG-path JSON settings for sk_office extensions, mirroring the sksuite
 Settings convention (config_dir()/settings.json, tolerant load, indented save).
 """
 
