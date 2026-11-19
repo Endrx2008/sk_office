@@ -2,8 +2,8 @@
 # Licensed under GNU GPL v3 or later — see the LICENSE file or <https://www.gnu.org/licenses/>
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-"""XDG-path JSON settings for sk_office extensions, mirroring the sksuite
-Settings convention (config_dir()/settings.json, tolerant load, indented save).
+"""XDG-path JSON settings for the sk_office extensions, like the other SKAI
+tools (config_dir()/settings.json, tolerant load, indented save).
 """
 
 from __future__ import annotations

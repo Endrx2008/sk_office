@@ -17,9 +17,9 @@ import re
 from .ollama_client import DEFAULT_HOST, OllamaError, list_models
 
 NO_MODEL_MESSAGE = (
-    "Ai features are disabled.\n"
-    "It looks like you turned off AI in the skai settings.\n"
-    "Without a selected model, skai cannot function."
+    "AI features are disabled.\n"
+    "It looks like you turned off AI in the SKAI settings.\n"
+    "Without a selected model, SKAI cannot function."
 )
 
 
@@ -49,15 +49,17 @@ def pick_best_model(host: str = DEFAULT_HOST) -> str:
 
 
 def best_model(host: str = DEFAULT_HOST) -> tuple[str, float]:
-    """(name, parameter count) of the installed model with the most parameters."""
+    """(name, parameter count) of the installed model with the most parameters;
+    the size on disk only breaks ties. Ollama unreachable or without models
+    raises NoModelError: the panels then show the same alert as every SKAI tool."""
     try:
         models = list_models(host)
     except OllamaError as exc:
-        if "no models installed" in str(exc):
+        if "no models installed" in str(exc) or "could not reach Ollama" in str(exc):
             raise NoModelError(NO_MODEL_MESSAGE) from exc
         raise
     def size(m):
         return _param_count((m.get("details") or {}).get("parameter_size", ""))
 
-    best = max(models, key=size)
+    best = max(models, key=lambda m: (size(m), m.get("size", 0) or 0))
     return best["name"], size(best)

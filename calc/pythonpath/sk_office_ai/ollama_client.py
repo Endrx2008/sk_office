@@ -4,8 +4,7 @@
 
 """Minimal stdlib (http.client) REST client for a local Ollama server.
 
-Ported from the sksuite convention (see skmail's core/ai/ollama_client.py):
-no SDK dependency, just list_models()/chat() against the REST API, both
+The same client as every SKAI tool: no SDK dependency, just list_models()/chat() against the REST API, both
 raising OllamaError on network/JSON/empty-reply failures.
 """
 

@@ -284,7 +284,7 @@ def ask_confirm(ctx, parent_peer, sections) -> bool:
         Label=t("apply_changes"), PushButtonType=1)
     add("cancel", "com.sun.star.awt.UnoControlButtonModel",
         PositionX=width - _MARGIN - half, PositionY=y, Width=half, Height=16,
-        Label=t("cancel_changes"), PushButtonType=2)
+        Label=t("cancel_changes"), PushButtonType=2, DefaultButton=True)
     y += 20
     add("legend", "com.sun.star.awt.UnoControlFixedTextModel",
         PositionX=_MARGIN, PositionY=y, Width=inner, Height=10,
@@ -296,6 +296,7 @@ def ask_confirm(ctx, parent_peer, sections) -> bool:
     dialog.setModel(dlg_model)
     toolkit = smgr.createInstanceWithContext("com.sun.star.awt.Toolkit", ctx)
     dialog.createPeer(toolkit, parent_peer)
+    dialog.getControl("cancel").setFocus()  # Enter alone keeps the document as it is
     try:
         return dialog.execute() == 1
     finally:
