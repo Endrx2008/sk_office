@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<oor:component-data xmlns:oor="http://openoffice.org/2001/registry"
+                     xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                     oor:name="Sidebar" oor:package="org.openoffice.Office.UI">
+ <node oor:name="Content">
+  <node oor:name="DeckList">
+   <node oor:name="SkLibreCalcAiDeck" oor:op="replace">
+    <prop oor:name="Title" oor:type="xs:string">
+     <value xml:lang="en-US">AI Assistant</value>
+     <value xml:lang="it">Assistente IA</value>
+     <value xml:lang="es">Asistente IA</value>
+     <value xml:lang="fr">Assistant IA</value>
+     <value xml:lang="de">KI-Assistent</value>
+    </prop>
+    <prop oor:name="Id" oor:type="xs:string">
+     <value>SkLibreCalcAiDeck</value>
+    </prop>
+    <prop oor:name="IconURL" oor:type="xs:string">
+     <value>%origin%/img/icon.png</value>
+    </prop>
+    <prop oor:name="HighContrastIconURL" oor:type="xs:string">
+     <value>%origin%/img/icon_hc.png</value>
+    </prop>
+    <prop oor:name="OrderIndex" oor:type="xs:int">
+     <value>1000</value>
+    </prop>
+    <prop oor:name="ContextList">
+     <value oor:separator=";">Calc, any, visible;</value>
+    </prop>
+   </node>
+  </node>
+  <node oor:name="PanelList">
+   <node oor:name="SkLibreCalcAiPanel" oor:op="replace">
+    <prop oor:name="Title" oor:type="xs:string">
+     <value xml:lang="en-US">AI Assistant</value>
+     <value xml:lang="it">Assistente IA</value>
+     <value xml:lang="es">Asistente IA</value>
+     <value xml:lang="fr">Assistant IA</value>
+     <value xml:lang="de">KI-Assistent</value>
+    </prop>
+    <prop oor:name="TitleBarIsOptional" oor:type="xs:boolean">
+     <value>true</value>
+    </prop>
+    <prop oor:name="Id" oor:type="xs:string">
+     <value>SkLibreCalcAiPanel</value>
+    </prop>
+    <prop oor:name="DeckId" oor:type="xs:string">
+     <value>SkLibreCalcAiDeck</value>
+    </prop>
+    <prop oor:name="WantsAWT" oor:type="xs:boolean">
+     <value>true</value>
+    </prop>
+    <prop oor:name="OrderIndex" oor:type="xs:int">
+     <value>1000</value>
+    </prop>
+    <prop oor:name="ImplementationURL" oor:type="xs:string">
+     <value>private:resource/toolpanel/org.skorpionos.sk_office.calc.PanelFactory/SkLibreCalcAiPanel</value>
+    </prop>
+    <prop oor:name="ContextList">
+     <value oor:separator=";">Calc, any, visible;</value>
+    </prop>
+   </node>
+   <node oor:name="SkLibreCalcFormulaPanel" oor:op="replace">
+    <prop oor:name="Title" oor:type="xs:string">
+     <value xml:lang="en-US">Find a formula</value>
+     <value xml:lang="it">Trova una formula</value>
+     <value xml:lang="es">Buscar una fórmula</value>
+     <value xml:lang="fr">Trouver une formule</value>
+     <value xml:lang="de">Formel finden</value>
+    </prop>
+    <prop oor:name="Id" oor:type="xs:string">
+     <value>SkLibreCalcFormulaPanel</value>
+    </prop>
+    <prop oor:name="DeckId" oor:type="xs:string">
+     <value>SkLibreCalcAiDeck</value>
+    </prop>
+    <prop oor:name="WantsAWT" oor:type="xs:boolean">
+     <value>true</value>
+    </prop>
+    <prop oor:name="OrderIndex" oor:type="xs:int">
+     <value>2000</value>
+    </prop>
+    <prop oor:name="ImplementationURL" oor:type="xs:string">
+     <value>private:resource/toolpanel/org.skorpionos.sk_office.calc.PanelFactory/SkLibreCalcFormulaPanel</value>
+    </prop>
+    <prop oor:name="ContextList">
+     <value oor:separator=";">Calc, any, visible;</value>
+    </prop>
+   </node>
+  </node>
+ </node>
+</oor:component-data>
