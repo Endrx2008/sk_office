@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright (C) 2026 Enrico Miot (EndrX) · SPDX-License-Identifier: GPL-3.0-or-later -->
 <oor:component-data xmlns:oor="http://openoffice.org/2001/registry"
                      xmlns:xs="http://www.w3.org/2001/XMLSchema"
                      oor:name="Factories" oor:package="org.openoffice.Office.UI">

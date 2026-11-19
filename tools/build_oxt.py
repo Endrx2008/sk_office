@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+# Copyright (C) 2026 Enrico Miot (EndrX)
+# Licensed under GNU GPL v3 or later — see the LICENSE file or <https://www.gnu.org/licenses/>
+# SPDX-License-Identifier: GPL-3.0-or-later
 """Build the three extensions: python3 tools/build_oxt.py [outdir]  ->  sk_office-<app>-ai.oxt"""
 import sys, zipfile
 from pathlib import Path
