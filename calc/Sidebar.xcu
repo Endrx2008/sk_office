@@ -5,7 +5,7 @@
                      oor:name="Sidebar" oor:package="org.openoffice.Office.UI">
  <node oor:name="Content">
   <node oor:name="DeckList">
-   <node oor:name="SkLibreCalcAiDeck" oor:op="replace">
+   <node oor:name="SkOfficeCalcAiDeck" oor:op="replace">
     <prop oor:name="Title" oor:type="xs:string">
      <value xml:lang="en-US">AI Assistant</value>
      <value xml:lang="it">Assistente IA</value>
@@ -14,7 +14,7 @@
      <value xml:lang="de">KI-Assistent</value>
     </prop>
     <prop oor:name="Id" oor:type="xs:string">
-     <value>SkLibreCalcAiDeck</value>
+     <value>SkOfficeCalcAiDeck</value>
     </prop>
     <prop oor:name="IconURL" oor:type="xs:string">
      <value>%origin%/img/icon.png</value>
@@ -31,7 +31,7 @@
    </node>
   </node>
   <node oor:name="PanelList">
-   <node oor:name="SkLibreCalcAiPanel" oor:op="replace">
+   <node oor:name="SkOfficeCalcAiPanel" oor:op="replace">
     <prop oor:name="Title" oor:type="xs:string">
      <value xml:lang="en-US">AI Assistant</value>
      <value xml:lang="it">Assistente IA</value>
@@ -43,10 +43,10 @@
      <value>true</value>
     </prop>
     <prop oor:name="Id" oor:type="xs:string">
-     <value>SkLibreCalcAiPanel</value>
+     <value>SkOfficeCalcAiPanel</value>
     </prop>
     <prop oor:name="DeckId" oor:type="xs:string">
-     <value>SkLibreCalcAiDeck</value>
+     <value>SkOfficeCalcAiDeck</value>
     </prop>
     <prop oor:name="WantsAWT" oor:type="xs:boolean">
      <value>true</value>
@@ -55,13 +55,13 @@
      <value>1000</value>
     </prop>
     <prop oor:name="ImplementationURL" oor:type="xs:string">
-     <value>private:resource/toolpanel/org.skorpionos.sk_office.calc.PanelFactory/SkLibreCalcAiPanel</value>
+     <value>private:resource/toolpanel/org.skorpionos.sk_office.calc.PanelFactory/SkOfficeCalcAiPanel</value>
     </prop>
     <prop oor:name="ContextList">
      <value oor:separator=";">Calc, any, visible;</value>
     </prop>
    </node>
-   <node oor:name="SkLibreCalcFormulaPanel" oor:op="replace">
+   <node oor:name="SkOfficeCalcFormulaPanel" oor:op="replace">
     <prop oor:name="Title" oor:type="xs:string">
      <value xml:lang="en-US">Find a formula</value>
      <value xml:lang="it">Trova una formula</value>
@@ -70,10 +70,10 @@
      <value xml:lang="de">Formel finden</value>
     </prop>
     <prop oor:name="Id" oor:type="xs:string">
-     <value>SkLibreCalcFormulaPanel</value>
+     <value>SkOfficeCalcFormulaPanel</value>
     </prop>
     <prop oor:name="DeckId" oor:type="xs:string">
-     <value>SkLibreCalcAiDeck</value>
+     <value>SkOfficeCalcAiDeck</value>
     </prop>
     <prop oor:name="WantsAWT" oor:type="xs:boolean">
      <value>true</value>
@@ -82,7 +82,7 @@
      <value>2000</value>
     </prop>
     <prop oor:name="ImplementationURL" oor:type="xs:string">
-     <value>private:resource/toolpanel/org.skorpionos.sk_office.calc.PanelFactory/SkLibreCalcFormulaPanel</value>
+     <value>private:resource/toolpanel/org.skorpionos.sk_office.calc.PanelFactory/SkOfficeCalcFormulaPanel</value>
     </prop>
     <prop oor:name="ContextList">
      <value oor:separator=";">Calc, any, visible;</value>

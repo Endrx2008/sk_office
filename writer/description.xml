@@ -6,7 +6,10 @@
   <identifier value="org.skorpionos.sk_office.writer.aisidebar"/>
   <version value="0.2.0"/>
   <display-name>
-    <name lang="en">sk_office AI Sidebar (Writer)</name>
+    <name lang="en">SKAI for LibreOffice (Writer)</name>
   </display-name>
+  <publisher>
+    <name xlink:href="https://github.com/Endrx2008/sk_office" lang="en">Enrico Miot (EndrX)</name>
+  </publisher>
   <platform value="all"/>
 </description>

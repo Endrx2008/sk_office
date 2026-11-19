@@ -20,7 +20,7 @@ class PanelFactory(unohelper.Base, XUIElementFactory, XServiceInfo):
 
     def createUIElement(self, resource_url, args):
         props = {p.Name: p.Value for p in args}
-        if resource_url.endswith("/SkLibreCalcFormulaPanel"):
+        if resource_url.endswith("/SkOfficeCalcFormulaPanel"):
             from CalcFormulaPanel import FormulaPanel
             return FormulaPanel(
                 self.ctx,
