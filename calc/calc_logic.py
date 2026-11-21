@@ -18,6 +18,7 @@ the chat history.
 
 from __future__ import annotations
 
+import re
 import traceback
 
 import uno
@@ -126,6 +127,75 @@ def _parse_cell_ref(sheet, ref):
     return addr.StartColumn, addr.StartRow
 
 
+def _as_text(value) -> str:
+    """A JSON value from the model as the text it would type into the cell."""
+    if isinstance(value, bool):
+        return "TRUE" if value else "FALSE"
+    if isinstance(value, float) and value.is_integer():
+        return str(int(value))
+    return "" if value is None else str(value)
+
+
+# What the cell API reads as a number. Leading zeros (007, 0039...) stay text, like codes and phone numbers.
+_NUMBER = re.compile(r"^[+-]?(?:0|[1-9]\d*)?(?:\.\d+)?(?:[eE][+-]?\d+)?$")
+_PERCENT = re.compile(r"^[+-]?(?:0|[1-9]\d*)(?:\.\d+)?\s?%$")
+_ISO_DATE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
+# setFormula() wants the API grammar: English names, ";" between arguments. Models write ",".
+_FORMULA_ERRORS_FIXED_BY_SEMICOLONS = (501, 504, 508, 509, 510, 511)
+
+
+def _commas_to_semicolons(formula: str) -> str:
+    """=IF(A1>1,"a,b",2) -> =IF(A1>1;"a,b";2): commas outside string literals become ";"."""
+    out, quoted = [], False
+    for ch in formula:
+        if ch == '"':
+            quoted = not quoted
+        out.append(";" if ch == "," and not quoted else ch)
+    return "".join(out)
+
+
+def _write_cell(doc, cell, value: str) -> str | None:
+    """Write ``value`` the way Calc would take it typed in: formulas as formulas, numbers as numbers
+    (percent and ISO dates with their format), everything else as text. Returns a problem to report
+    (a formula Calc can't compute), or None."""
+    text = value.strip()
+    if text.startswith("=") and len(text) > 1:
+        cell.setFormula(text)
+        if cell.getError() in _FORMULA_ERRORS_FIXED_BY_SEMICOLONS and "," in text:
+            cell.setFormula(_commas_to_semicolons(text))
+            if cell.getError():
+                cell.setFormula(text)
+        error = cell.getError()
+        return f"{text} gives {cell.getString()} (error {error})" if error else None
+    if text and any(ch.isdigit() for ch in text) and _NUMBER.match(text):
+        cell.setValue(float(text))
+    elif text.upper() in ("TRUE", "FALSE"):
+        cell.setValue(1.0 if text.upper() == "TRUE" else 0.0)
+        cell.NumberFormat = doc.getNumberFormats().getStandardFormat(1024, cell.CharLocale)  # LOGICAL
+    elif _PERCENT.match(text):
+        cell.setValue(float(text.rstrip("% ")) / 100)
+        cell.NumberFormat = _number_format_key(doc, cell, "percent")
+    elif _ISO_DATE.match(text):
+        cell.setFormula(text)
+        if cell.getError() or cell.getType().value != "VALUE":
+            cell.setString(value)
+        else:
+            cell.NumberFormat = _number_format_key(doc, cell, "date")
+    else:
+        cell.setString(value)
+    return None
+
+
+def _holds(cell, value: str) -> bool:
+    """True when the cell already shows or contains ``value`` (a formula, or a number as the model wrote it)."""
+    if cell.getString() == value or (value and cell.getFormula() == value):
+        return True
+    if value.startswith("=") and cell.getFormula() == _commas_to_semicolons(value):
+        return True
+    return bool(_NUMBER.match(value.strip()) and value.strip() and cell.getType().value == "VALUE"
+                and any(ch.isdigit() for ch in value) and cell.getValue() == float(value.strip()))
+
+
 def _plan_table(sheet, action):
     """-> (writes, note): writes is a list of (col, row, value) the action
     wants, computed without touching the sheet so conflicts can be checked
@@ -145,7 +215,7 @@ def _plan_table(sheet, action):
         if not isinstance(row, list):
             row = [row]
         for c, value in enumerate(row):
-            writes.append((start_col + c, r, str(value)))
+            writes.append((start_col + c, r, _as_text(value)))
         r += 1
 
     num_cols = max([len(headers)] + [len(row) if isinstance(row, list) else 1 for row in rows] + [0])
@@ -165,8 +235,8 @@ def _plan_set_cell(sheet, action):
         col, row = _parse_cell_ref(sheet, cell_ref)
     except Exception:
         return [], f"set_cell action failed: bad cell reference {cell_ref!r}."
-    value = action.get("value", "")
-    return [(col, row, str(value))], f"Set {cell_ref} to {value!r}."
+    value = _as_text(action.get("value", ""))
+    return [(col, row, value)], f"Set {cell_ref} to {value!r}."
 
 
 _MAX_CLEAR_CELLS = 10000
@@ -656,9 +726,10 @@ def apply_turn(doc, request: dict, result: dict, model: str, resolve_conflict=No
 
     conflicts = []
     for col, row, value in writes:
-        current = sheet.getCellByPosition(col, row).getString()
+        cell = sheet.getCellByPosition(col, row)
+        current = cell.getString()
         base = _base_value(request, col, row)
-        if base is not None and current != base and current != value:
+        if base is not None and current != base and not _holds(cell, value):
             conflicts.append((col, row, base, current, value))
 
     if conflicts and resolve_conflict is not None:
@@ -699,8 +770,9 @@ def apply_turn(doc, request: dict, result: dict, model: str, resolve_conflict=No
     # cells and formatting never ask.
     overwrites = []
     for col, row, value in writes:
-        current = sheet.getCellByPosition(col, row).getString()
-        if current and current != value:
+        cell = sheet.getCellByPosition(col, row)
+        current = cell.getString()
+        if current and not _holds(cell, value):
             overwrites.append((col, row, current, value))
     if overwrites and confirm_changes is not None:
         sections = [(_cell_name(col, row), [current], [value] if value else [])
@@ -712,8 +784,13 @@ def apply_turn(doc, request: dict, result: dict, model: str, resolve_conflict=No
             action_notes.append(f"The user did not let you overwrite or clear {len(skip)} "
                                 "cell(s) that already had content.")
 
+    problems = []
     for col, row, value in writes:
-        sheet.getCellByPosition(col, row).setString(value)
+        problem = _write_cell(doc, sheet.getCellByPosition(col, row), value)
+        if problem:
+            problems.append(f"{_cell_name(col, row)}: {problem}")
+    if problems:
+        action_notes.append("Calc could not compute: " + "; ".join(problems) + ".")
 
     formatted = False
     # deleting a sheet is a deletion too: it needs the user's OK
